@@ -43,6 +43,7 @@ strong {
 
 table {
     border-collapse: collapse;
+    width: 1200px;
     margin: 20px auto;
 }
 
@@ -95,6 +96,8 @@ p {
 
 .header_transition {
     position: absolute;
+    max-height: 300px;
+    overflow: hidden;
     top: -15vh;
     width: 100%;
     z-index: 0;
@@ -145,4 +148,35 @@ p {
     padding: 20px 0 40px 0;
     text-align: center;
     background: #F0F0F0;
+}
+
+@media screen and (max-width:1400px) {
+    table, pre, section .section_content {
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width:1100px) {
+    table, pre, section .section_content {
+        width: 850px;
+    }
+}
+
+@media screen and (max-width:950px) {
+    table, pre, section .section_content {
+        width: 650px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    table, pre, section .section_content {
+        width: 550px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    table, pre, section .section_content {
+        width: 90%;
+        margin-left: 5%;
+    }
 }
