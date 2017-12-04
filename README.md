@@ -2,7 +2,7 @@
 
 Minimalist dependancy free Masonry layout library
 
-MiniMasonry is a **lightweight** (2kb) dependancy free Masonry layout. It will compute elements position in Javascript and update update their positions using css's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allow css animation during element positionning.
+MiniMasonry is a **lightweight** (2kb) dependancy free Masonry layout. It will compute elements position in Javascript and update their positions using css's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allow css animation during element positionning.
 
 MiniMasonry is **responsive**, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.
 

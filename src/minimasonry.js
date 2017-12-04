@@ -42,6 +42,11 @@ MiniMasonry.prototype.reset = function() {
     this._columns = [];
     this._count = null;
     this._width = this._container.clientWidth;
+    var minWidth = ((2 * this.conf.gutter) + this.conf.baseWidth);
+    if (this._width < minWidth) {
+        this._width = minWidth;
+        this._container.style.minWidth = minWidth + 'px';
+    }
     this._gutter = this.conf.gutter;
     if (this._width < 530) {
         this._gutter = 5;
