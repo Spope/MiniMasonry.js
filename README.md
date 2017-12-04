@@ -17,7 +17,7 @@ Just include the minified version of MiniMasonry.js on your website :
 
 ## Usage
 
-To use MiniMasonry you should have a container with your elements as children. Those **children** elements must be **absolutely positioned**.
+To use MiniMasonry you should have a container **relatively positioned** with your elements as children. Those **children** elements must be **absolutely positioned**.
 
 Then you can initialise MiniMasonry :
 
