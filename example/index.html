@@ -41,8 +41,8 @@
                 <div class="header_transition_mask"></div>
             </div>
             <div class="description_content">
-                <p class="section_content">MiniMasonry is a responsive lightweight (2kb) dependancy free Masonry layout. It will compute elements position in Javascript and update update their positions using css's transform attribute. This means positioning does not throw browser layout and use the device's GPU. This also allow css animation during element positionning.</p>
-                <p class="section_content">MiniMasonry is responsive, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.</p>
+                <p class="section_content">MiniMasonry is a <strong>lightweight</strong> (2kb) dependancy free Masonry layout. It will compute elements position in Javascript and update update their positions using css's <strong>transform attribute</strong>. This means positioning does not trigger browser layout and <strong>use</strong> the device's <strong>GPU</strong>. This also allow css animation during element positionning.</p>
+                <p class="section_content">MiniMasonry is <strong>responsive</strong>, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.</p>
 
                 <h2 class="section_content">Installation</h2>
                 <p class="section_content">Just include the minified version of MiniMasonry.js on your website :</p>
@@ -65,9 +65,11 @@
                 <p class="section_content">Here is the list of available parameters : </p>
                 <table>
                     <thead>
-                        <td>Name</td>
-                        <td>Default value</td>
-                        <td>Description</td>
+                        <tr>
+                            <td>Name</td>
+                            <td>Default value</td>
+                            <td>Description</td>
+                        </tr>
                     </thead>
                     <tr>
                         <td>baseWidth</td>
@@ -77,7 +79,7 @@
                     <tr>
                         <td>container</td>
                         <td>Null</td>
-                        <td>Container selector</td>
+                        <td>Container selector. <strong>Required</strong></td>
                     </tr>
                     <tr>
                         <td>gutter</td>
@@ -86,7 +88,7 @@
                     </tr>
                     <tr>
                         <td>minify</td>
-                        <td>true</t>
+                        <td>true</td>
                         <td>Whether or not MiniMasonry place elements on shortest column or keep exact order of list</td>
                     </tr>
                 </table>
