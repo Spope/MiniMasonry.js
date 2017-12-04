@@ -14,7 +14,7 @@ body {
 
 h1 {
     font-size: 4em;
-    margin: 0.5em 0;
+    margin: 22px 0;
 }
 h2 {
     font-size: 2em;
@@ -25,12 +25,16 @@ ul {
     list-style: none;
 }
 
+.pre_wrapper {
+    background: #F0F0F0;
+    margin: 20px 0 40px 0;
+    padding: 20px 0;
+}
+
 pre {
-    width: 100%;
-    display: inline-block;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-top: 20px;
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 strong {
@@ -51,13 +55,18 @@ table td {
     padding: 10px;
 }
 
-section {
+section .section_content {
     width: 1200px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 a {
     color: #F761A1;
+}
+
+p {
+    margin-top: 20px;
 }
 
 .header {
@@ -75,6 +84,9 @@ a {
 .header h1, .header p {
     color: white;
     text-align: center;
+}
+.header p.legend {
+    margin-bottom: 44px;
 }
 
 .description {
@@ -115,7 +127,7 @@ a {
 
 .example .container {
     position: relative;
-    margin: 20px 0 60px 0;
+    margin: 20px auto 60px auto;
 }
 .example .item {
     position: absolute;
@@ -125,4 +137,12 @@ a {
     font-weight: white;
     color: white;
     line-height: 1.5em;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.footer {
+    padding: 20px 0 40px 0;
+    text-align: center;
+    background: #F0F0F0;
 }
