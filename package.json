@@ -1,0 +1,14 @@
+{
+  "name": "MiniMasonry",
+  "description": "Minimalist dependancy free Masonry layout library",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-uglify": "*"
+  },
+  "scripts": {
+    "start": "",
+    "build": ""
+  }
+}
