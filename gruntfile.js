@@ -11,7 +11,7 @@ module.exports = function(grunt) {
             },
             home: {
                 files: {
-                    './build/minimasonry.js' : [
+                    './build/minimasonry.min.js' : [
                         './src/minimasonry.js'
                     ]
                 }
