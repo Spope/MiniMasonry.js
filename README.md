@@ -1,3 +1,5 @@
+<p align="center"><a href="https://projects.spope.fr/masonry/example/index.html" target="_blank"><img width="100"src="https://raw.githubusercontent.com/Spope/MiniMasonry.js/master/example/icon.png"></a></p>
+
 # MiniMasonry.js
 
 Minimalist dependancy free Masonry layout library
