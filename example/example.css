@@ -75,18 +75,19 @@ p {
 .header {
     width: 100%;
     height: 80vh;
+    min-height: 490px;
     background-image: linear-gradient( 135deg, #F761A1 10%, #8C1BAB 100%);
 }
 
 .header_content {
     display: inline-block;
     width: 100%;
-    margin-top: 20vh;
+    margin-top: 10vh;
+    text-align: center;
 }
 
 .header h1, .header p {
     color: white;
-    text-align: center;
 }
 .header p.legend {
     margin-bottom: 44px;
