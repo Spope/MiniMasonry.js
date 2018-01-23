@@ -1,4 +1,4 @@
-<p align="center"><a href="https://projects.spope.fr/masonry/example/index.html" target="_blank"><img width="100" height="100" src="https://raw.githubusercontent.com/Spope/MiniMasonry.js/master/example/icon.png"></a></p>
+<p align="center"><a href="https://spope.github.com/MiniMasonry.js" target="_blank"><img width="100" height="100" src="https://spope.github.com/MiniMasonry.js/icon.png"></a></p>
 
 # MiniMasonry.js
 
@@ -51,7 +51,7 @@ MiniMasonry will add a "resize" event listener on the window to redraw the mason
 
 ## Example
 
-[See website](https://projects.spope.fr/masonry/example/index.html)
+[See website](https://spope.github.com/MiniMasonry.js)
 
 ## License
 
