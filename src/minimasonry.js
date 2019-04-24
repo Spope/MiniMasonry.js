@@ -21,8 +21,6 @@ var MiniMasonry = function(conf) {
 }
 
 MiniMasonry.prototype.init = function(conf) {
-    if (conf.container == undefined) {
-    }
     for (var i in this.conf) {
         if (conf[i] != undefined) {
             this.conf[i] = conf[i];
@@ -30,7 +28,7 @@ MiniMasonry.prototype.init = function(conf) {
     }
     this._container = document.querySelector(this.conf.container);
     if (!this._container) {
-        throw new Error('Container not found');
+        throw new Error('Container not found or missing');
     }
     window.addEventListener("resize", this.resizeThrottler.bind(this));
 
