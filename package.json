@@ -1,5 +1,5 @@
 {
-  "name": "MiniMasonry",
+  "name": "minimasonry",
   "description": "Minimalist dependancy free Masonry layout library",
   "version": "1.0.0",
   "devDependencies": {
@@ -10,5 +10,22 @@
   "scripts": {
     "start": "",
     "build": ""
-  }
+  },
+  "main": "build/minimasonry.min.js",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spope/MiniMasonry.js.git"
+  },
+  "keywords": [
+    "Masonry",
+    "Layout",
+    "Minimalist"
+  ],
+  "author": "Spope",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Spope/MiniMasonry.js/issues"
+  },
+  "homepage": "https://github.com/Spope/MiniMasonry.js#readme"
 }
