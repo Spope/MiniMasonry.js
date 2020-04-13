@@ -43,6 +43,7 @@ baseWidth|255|Target width of elements.
 container|Null|Container selector. **Required**
 gutter|10|Width / height of gutter between elements/
 minify|true|Whether or not MiniMasonry place elements on shortest column or keep exact order of list.
+ultimateGutter|5|Gutter applied when only 1 column can be displayed.
 
 ## API
 
