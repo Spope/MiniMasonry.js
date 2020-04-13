@@ -12,7 +12,8 @@ var MiniMasonry = function(conf) {
         baseWidth: 255,
         gutter: 10,
         container: null,
-        minify: true
+        minify: true,
+        ultimateGutter: 5
     };
 
     this.init(conf);
@@ -36,20 +37,31 @@ MiniMasonry.prototype.init = function(conf) {
 };
 
 MiniMasonry.prototype.reset = function() {
-    this._sizes = [];
+    this._sizes   = [];
     this._columns = [];
-    this._count = null;
-    this._width = this._container.clientWidth;
-    var minWidth = ((2 * this.conf.gutter) + this.conf.baseWidth);
+    this._count   = null;
+    this._width   = this._container.clientWidth;
+    var minWidth  = this.conf.baseWidth;
     if (this._width < minWidth) {
         this._width = minWidth;
         this._container.style.minWidth = minWidth + 'px';
     }
     this._gutter = this.conf.gutter;
-    if (this._width < 530) {
-        this._gutter = 5;
+    if (this.getCount() == 1) {
+        // Set ultimate gutter when only one column is displayed
+        this._gutter = this.conf.ultimateGutter;
+        this._count = 1;
+    }
+
+    if (this._width < (this.conf.baseWidth + (2 * this._gutter))) {
+        // Remove gutter when screen is to low
+        this._gutter = 0;
     }
 };
+
+MiniMasonry.prototype.getCount = function() {
+    return Math.floor((this._width - this._gutter) / (this.conf.baseWidth + this._gutter));
+}
 
 MiniMasonry.prototype.layout =  function() {
     if (!this._container) {
@@ -59,7 +71,9 @@ MiniMasonry.prototype.layout =  function() {
     this.reset();
 
     //Computing columns width
-    this._count = Math.floor((this._width - this._gutter) / (this.conf.baseWidth + this.conf.gutter));
+    if (this._count == null) {
+        this._count = this.getCount();
+    }
     var width   = ((this._width - this._gutter) / this._count) - this._gutter;
 
     for (var i = 0; i < this._count; i++) {
@@ -90,7 +104,7 @@ MiniMasonry.prototype.layout =  function() {
 
         children[index].style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)';
 
-        this._columns[shortest]  += this._sizes[index] + this.conf.gutter;//margin-bottom
+        this._columns[shortest]  += this._sizes[index] + (this._count > 1 ? this._gutter : this.conf.ultimateGutter);//margin-bottom
     }
 
     this._container.style.height = this._columns[this.getLongest()] + 'px';
