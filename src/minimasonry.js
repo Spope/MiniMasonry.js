@@ -50,6 +50,7 @@ MiniMasonry.prototype.reset = function() {
     if (this.getCount() == 1) {
         // Set ultimate gutter when only one column is displayed
         this._gutter = this.conf.ultimateGutter;
+        // As gutters are reduced, to column may fit, forcing to 1
         this._count = 1;
     }
 
