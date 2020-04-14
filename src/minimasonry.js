@@ -147,7 +147,7 @@ MiniMasonry.prototype.resizeThrottler = function() {
             if (this._container.clientWidth != this._width) {
                 this.layout();
             }
-           // The actualResizeHandler will execute at a rate of 15fps
-        }.bind(this), 66);
+           // The actualResizeHandler will execute at a rate of 30fps
+        }.bind(this), 33);
     }
 }
