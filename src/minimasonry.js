@@ -75,22 +75,23 @@ MiniMasonry.prototype.layout =  function() {
     if (this._count == null) {
         this._count = this.getCount();
     }
-    var width   = ((this._width - this._gutter) / this._count) - this._gutter;
+    var width   = Math.round(((this._width - this._gutter) / this._count) - this._gutter);
 
     for (var i = 0; i < this._count; i++) {
         this._columns[i] = 0;
     }
 
-
     //Saving children real heights
     var children = this._container.querySelectorAll(this.conf.container + ' > *');
     for (var k = 0;k< children.length; k++) {
+        // Set width before retrieving element height if content is proportional
+        children[k].style.width = width + 'px';
         this._sizes[k] = children[k].clientHeight;
     }
 
-    //If more columns than children
     var initialLeft = this._gutter;
     if (this._count > this._sizes.length) {
+        //If more columns than children
         initialLeft = (((this._width - (this._sizes.length * width)) - this._gutter) / 2) - this._gutter;
     }
 
@@ -98,7 +99,6 @@ MiniMasonry.prototype.layout =  function() {
     for (var index = 0;index < children.length; index++) {
         var shortest = this.conf.minify ? this.getShortest() : this.getNextColumn(index);
 
-        children[index].style.width = Math.round(width) + 'px';
         var x = initialLeft + ((width + this._gutter) * (shortest));
         var y = this._columns[shortest];
 
