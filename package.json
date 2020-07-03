@@ -11,7 +11,7 @@
     "start": "",
     "build": "rollup --config"
   },
-  "main": "build/minimasonry.min.js",
+  "main": "build/minimasonry.esm.js",
   "dependencies": {},
   "repository": {
     "type": "git",
@@ -27,5 +27,5 @@
   "bugs": {
     "url": "https://github.com/Spope/MiniMasonry.js/issues"
   },
-  "homepage": "https://github.com/Spope/MiniMasonry.js#readme"
+  "homepage": "https://spope.github.io/MiniMasonry.js/"
 }
