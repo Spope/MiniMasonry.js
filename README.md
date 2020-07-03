@@ -10,16 +10,19 @@ MiniMasonry is **responsive**, you give it a target width and it will adjust col
 
 ## Installation
 
-You can install MiniMasonry by cloning the repository, downloading the minified build/minimasonry.min.js or using npm :
-
+You can install MiniMasonry by cloning the repository, downloading the build type (minimasonry.min.js / minimasonry.esm.js) or using npm :
 ```shell
 npm install minimasonry
 ```
 
 Then, include the minified version of MiniMasonry.js on your website :
-
 ```html
 <script src="node_modules/minimasonry/build/minimasonry.min.js"></script>
+```
+
+or use it via ESM :
+```javascript
+import MiniMasonry from "minimasonry";
 ```
 
 ## Usage

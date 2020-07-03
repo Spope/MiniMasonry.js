@@ -19,7 +19,7 @@ var MiniMasonry = function(conf) {
     this.init(conf);
 
     return this;
-}
+};
 
 MiniMasonry.prototype.init = function(conf) {
     for (var i in this.conf) {
@@ -62,7 +62,7 @@ MiniMasonry.prototype.reset = function() {
 
 MiniMasonry.prototype.getCount = function() {
     return Math.floor((this._width - this._gutter) / (this.conf.baseWidth + this._gutter));
-}
+};
 
 MiniMasonry.prototype.layout =  function() {
     if (!this._container) {
@@ -150,6 +150,6 @@ MiniMasonry.prototype.resizeThrottler = function() {
            // The actualResizeHandler will execute at a rate of 30fps
         }.bind(this), 33);
     }
-}
+};
 
 module.exports = MiniMasonry;
