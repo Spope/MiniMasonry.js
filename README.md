@@ -42,11 +42,14 @@ Here is the list of available parameters :
 
 Name | Default value | Description
 -----|---------------|------------
-baseWidth|255|Target width of elements.
-container|Null|Container selector. **Required**
-gutter|10|Width / height of gutter between elements/
-minify|true|Whether or not MiniMasonry place elements on shortest column or keep exact order of list.
-ultimateGutter|5|Gutter applied when only 1 column can be displayed.
+baseWidth (int)|255|Target width of elements.
+container (string)|Null|Container selector. **Required**
+gutter (int)|10|Width / height of gutter between elements. Use gutterX / gutterY to set different values.
+gutterX (int)|null|Horizontal gutter. Need gutterY to works, fallback to `gutter`.
+gutterY (int)|null|Vertical gutter. Need gutterX to works, fallback to `gutter`.
+minify (boolean)|true|Whether or not MiniMasonry place elements on shortest column or keep exact order of list.
+surroundingGutter (boolean)|true|Set first and last gutter.
+ultimateGutter (int)|5|Gutter applied when only 1 column can be displayed.
 
 ## API
 

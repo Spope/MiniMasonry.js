@@ -1,19 +1,21 @@
 var MiniMasonry = function(conf) {
-    this._sizes = [];
-    this._columns = [];
-    this._container = null;
-    this._count = null;
-    this._width = 0;
-    this._gutter = 0;
+    this._sizes             = [];
+    this._columns           = [];
+    this._container         = null;
+    this._count             = null;
+    this._width             = 0;
 
     this._resizeTimeout = null,
 
     this.conf = {
         baseWidth: 255,
+        gutterX: null,
+        gutterY: null,
         gutter: 10,
         container: null,
         minify: true,
-        ultimateGutter: 5
+        ultimateGutter: 5,
+        surroundingGutter: true
     };
 
     this.init(conf);
@@ -27,6 +29,10 @@ MiniMasonry.prototype.init = function(conf) {
             this.conf[i] = conf[i];
         }
     }
+    if (this.conf.gutterX == null || this.conf.gutterY == null) {
+        this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
+    }
+
     this._container = document.querySelector(this.conf.container);
     if (!this._container) {
         throw new Error('Container not found or missing');
@@ -46,22 +52,38 @@ MiniMasonry.prototype.reset = function() {
         this._width = minWidth;
         this._container.style.minWidth = minWidth + 'px';
     }
-    this._gutter = this.conf.gutter;
+
     if (this.getCount() == 1) {
         // Set ultimate gutter when only one column is displayed
-        this._gutter = this.conf.ultimateGutter;
+        this.conf.gutterX = this.conf.ultimateGutter;
         // As gutters are reduced, to column may fit, forcing to 1
         this._count = 1;
     }
 
-    if (this._width < (this.conf.baseWidth + (2 * this._gutter))) {
+    if (this._width < (this.conf.baseWidth + (2 * this.conf.gutterX))) {
         // Remove gutter when screen is to low
-        this._gutter = 0;
+        this.conf.gutterX = 0;
     }
 };
 
 MiniMasonry.prototype.getCount = function() {
-    return Math.floor((this._width - this._gutter) / (this.conf.baseWidth + this._gutter));
+    if (this.conf.surroundingGutter) {
+        return Math.floor((this._width - this.conf.gutterX) / (this.conf.baseWidth + this.conf.gutterX));
+    }
+
+    return Math.floor((this._width + this.conf.gutterX) / (this.conf.baseWidth + this.conf.gutterX));
+};
+
+MiniMasonry.prototype.computeWidth = function() {
+    var width;
+    if (this.conf.surroundingGutter) {
+        width = ((this._width - this.conf.gutterX) / this._count) - this.conf.gutterX;
+    } else {
+        width = ((this._width + this.conf.gutterX) / this._count) - this.conf.gutterX;
+    }
+    width = Number.parseFloat(width.toFixed(2));
+
+    return width;
 };
 
 MiniMasonry.prototype.layout =  function() {
@@ -71,11 +93,12 @@ MiniMasonry.prototype.layout =  function() {
     }
     this.reset();
 
-    //Computing columns width
+    //Computing columns count
     if (this._count == null) {
         this._count = this.getCount();
     }
-    var width   = Math.round(((this._width - this._gutter) / this._count) - this._gutter);
+    //Computing columns width
+    var width = this.computeWidth();
 
     for (var i = 0; i < this._count; i++) {
         this._columns[i] = 0;
@@ -89,26 +112,31 @@ MiniMasonry.prototype.layout =  function() {
         this._sizes[k] = children[k].clientHeight;
     }
 
-    var initialLeft = this._gutter;
+    var initialLeft = this.conf.surroundingGutter ? this.conf.gutterX : 0;
     if (this._count > this._sizes.length) {
         //If more columns than children
-        initialLeft = (((this._width - (this._sizes.length * width)) - this._gutter) / 2) - this._gutter;
+        var occupiedSpace = (this._sizes.length * (width + this.conf.gutterX)) - this.conf.gutterX;
+        initialLeft       = ((this._width - occupiedSpace) / 2);
     }
 
     //Computing position of children
     for (var index = 0;index < children.length; index++) {
-        var shortest = this.conf.minify ? this.getShortest() : this.getNextColumn(index);
+        var nextColumn = this.conf.minify ? this.getShortest() : this.getNextColumn(index);
 
-        var x = initialLeft + ((width + this._gutter) * (shortest));
-        var y = this._columns[shortest];
+        var childrenGutter = 0;
+        if (this.conf.surroundingGutter || nextColumn != this._columns.length) {
+            childrenGutter = this.conf.gutterX;
+        }
+        var x = initialLeft + ((width + childrenGutter) * (nextColumn));
+        var y = this._columns[nextColumn];
 
 
         children[index].style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)';
 
-        this._columns[shortest]  += this._sizes[index] + (this._count > 1 ? this._gutter : this.conf.ultimateGutter);//margin-bottom
+        this._columns[nextColumn]  += this._sizes[index] + (this._count > 1 ? this.conf.gutterY : this.conf.ultimateGutter);//margin-bottom
     }
 
-    this._container.style.height = this._columns[this.getLongest()] + 'px';
+    this._container.style.height = (this._columns[this.getLongest()] - (this.conf.surroundingGutter ? 0 : this._conf.gutterY)) + 'px';
 };
 
 MiniMasonry.prototype.getNextColumn = function(index) {
