@@ -11,7 +11,8 @@
     "start": "",
     "build": "rollup --config"
   },
-  "main": "build/minimasonry.esm.js",
+  "main": "build/minimasonry.min.js",
+  "module": "build/minimasonry.esm.js",
   "dependencies": {},
   "repository": {
     "type": "git",
