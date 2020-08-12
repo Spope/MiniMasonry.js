@@ -152,4 +152,4 @@ MiniMasonry.prototype.resizeThrottler = function() {
     }
 };
 
-module.exports = MiniMasonry;
+export default MiniMasonry;

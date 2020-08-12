@@ -1,10 +1,10 @@
 var MiniMasonry = function(conf) {
-    this._sizes = [];
-    this._columns = [];
+    this._sizes     = [];
+    this._columns   = [];
     this._container = null;
-    this._count = null;
-    this._width = 0;
-    this._gutter = 0;
+    this._count     = null;
+    this._width     = 0;
+    this._gutter    = 0;
 
     this._resizeTimeout = null,
 
@@ -152,4 +152,4 @@ MiniMasonry.prototype.resizeThrottler = function() {
     }
 }
 
-module.exports = MiniMasonry;
+export default MiniMasonry;
