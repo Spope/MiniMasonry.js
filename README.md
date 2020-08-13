@@ -45,10 +45,10 @@ Name | Default value | Description
 baseWidth (int)|255|Target width of elements.
 container (string)|Null|Container selector. **Required**
 gutter (int)|10|Width / height of gutter between elements. Use gutterX / gutterY to set different values.
-gutterX (int)|null|Horizontal gutter. Need gutterY to works, fallback to `gutter`.
-gutterY (int)|null|Vertical gutter. Need gutterX to works, fallback to `gutter`.
+gutterX (int)|null|Width of gutter between elements. Need gutterY to works, fallback to `gutter`.
+gutterY (int)|null|Height of gutter between elements. Need gutterX to works, fallback to `gutter`.
 minify (boolean)|true|Whether or not MiniMasonry place elements on shortest column or keep exact order of list.
-surroundingGutter (boolean)|true|Set first and last gutter.
+surroundingGutter (boolean)|true|Set left gutter on first columns and right gutter on last.
 ultimateGutter (int)|5|Gutter applied when only 1 column can be displayed.
 
 ## API
