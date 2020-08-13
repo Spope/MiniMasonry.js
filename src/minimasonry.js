@@ -136,7 +136,7 @@ MiniMasonry.prototype.layout =  function() {
         this._columns[nextColumn]  += this._sizes[index] + (this._count > 1 ? this.conf.gutterY : this.conf.ultimateGutter);//margin-bottom
     }
 
-    this._container.style.height = (this._columns[this.getLongest()] - (this.conf.surroundingGutter ? 0 : this._conf.gutterY)) + 'px';
+    this._container.style.height = (this._columns[this.getLongest()] - this.conf.gutterY) + 'px';
 };
 
 MiniMasonry.prototype.getNextColumn = function(index) {
