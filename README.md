@@ -65,6 +65,8 @@ MiniMasonry will add a "resize" event listener on the window to redraw the mason
 
 [See website](https://spope.github.com/MiniMasonry.js)
 
+[codepen](https://codepen.io/Spope/pen/WNwrpyd)
+
 ## License
 
 MIT
