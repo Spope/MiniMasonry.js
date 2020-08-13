@@ -1,7 +1,7 @@
 {
   "name": "minimasonry",
   "description": "Minimalist dependancy free Masonry layout library",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "devDependencies": {
     "rollup": "^2.18.2",
     "rollup-plugin-commonjs": "^10.1.0",
