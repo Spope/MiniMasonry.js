@@ -43,7 +43,7 @@ Here is the list of available parameters :
 Name | Default value | Description
 -----|---------------|------------
 baseWidth (int)|255|Target width of elements.
-container (string)|Null|Container selector. **Required**
+container (string|HTMLElement)|Null|Container's selector or element. **Required**
 gutter (int)|10|Width / height of gutter between elements. Use gutterX / gutterY to set different values.
 gutterX (int)|null|Width of gutter between elements. Need gutterY to works, fallback to `gutter`.
 gutterY (int)|null|Height of gutter between elements. Need gutterX to works, fallback to `gutter`.
