@@ -33,7 +33,7 @@ MiniMasonry.prototype.init = function(conf) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
 
-    this._container = document.querySelector(this.conf.container);
+    this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ? this.conf.container : document.querySelector(this.conf.container);
     if (!this._container) {
         throw new Error('Container not found or missing');
     }
