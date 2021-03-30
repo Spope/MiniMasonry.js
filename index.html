@@ -87,7 +87,7 @@
                     <tr>
                         <td>container</td>
                         <td>Null</td>
-                        <td>Container selector. <strong>Required</strong></td>
+                        <td>Container selector or HTMLElement. <strong>Required</strong></td>
                     </tr>
                     <tr>
                         <td>gutter</td>
@@ -143,7 +143,7 @@
             <p class="section_content">Default parameters : </p>
                 <div class="pre_wrapper">
                     <pre><code class="javascript">var exampleDefault = new MiniMasonry({
-    container: '.example_default'
+    container: document.querySelector('.example_default')
 });</code></pre>
                 </div>
             <div class="container example_default section_content">
@@ -204,7 +204,7 @@
             });
 
             var exampleDefault = new MiniMasonry({
-                container: '.example_default'
+                container: document.querySelector('.example_default')
             });
 
             var exampleMinify = new MiniMasonry({
