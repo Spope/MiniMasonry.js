@@ -33,7 +33,10 @@ MiniMasonry.prototype.init = function(conf) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
 
-    this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ? this.conf.container : document.querySelector(this.conf.container);
+    this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ?
+        this.conf.container :
+        document.querySelector(this.conf.container);
+
     if (!this._container) {
         throw new Error('Container not found or missing');
     }
@@ -106,7 +109,6 @@ MiniMasonry.prototype.layout =  function() {
 
     //Saving children real heights
     var children = this._container.children;
-    console.log(children);
     for (var k = 0;k< children.length; k++) {
         // Set width before retrieving element height if content is proportional
         children[k].style.width = width + 'px';
