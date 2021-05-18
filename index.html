@@ -131,7 +131,11 @@
                     </thead>
                     <tr>
                         <td>layout()</td>
-                        <td>If list has changed, trigger a relayout of the masonry</td>
+                        <td>If list has changed, trigger a relayout of the masonry.</td>
+                    </tr>
+                    <tr>
+                        <td>destroy()</td>
+                        <td>Remove the resize listener and set back container as it was before initialization.</td>
                     </tr>
                 </table>
                 <p class="section_content">MiniMasonry will add a "resize" event listener on the window to redraw the masonry on resize. This listener is throttled to 33ms (30fps).</p>
