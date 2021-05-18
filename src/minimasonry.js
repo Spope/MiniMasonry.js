@@ -41,8 +41,8 @@ MiniMasonry.prototype.init = function(conf) {
     if (!this._container) {
         throw new Error('Container not found or missing');
     }
-    const onResize = this.resizeThrottler.bind(this)
 
+    var onResize = this.resizeThrottler.bind(this)
     window.addEventListener("resize", onResize);
     this._removeListener = function() {
         window.removeEventListener("resize", onResize);
