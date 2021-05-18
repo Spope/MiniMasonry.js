@@ -1,4 +1,4 @@
-<p align="center"><a href="https://spope.github.com/MiniMasonry.js" target="_blank"><img width="100" height="100" src="https://spope.github.com/MiniMasonry.js/icon.png"></a></p>
+<p align="center"><a href="https://spope.github.io/MiniMasonry.js/" target="_blank"><img width="100" height="100" src="https://spope.github.io/MiniMasonry.js/icon.png"></a></p>
 
 # MiniMasonry.js
 
