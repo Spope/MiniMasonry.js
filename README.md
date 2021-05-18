@@ -4,7 +4,7 @@
 
 Minimalist dependancy free Masonry layout library
 
-MiniMasonry is a **lightweight** (1kb Gzipped) dependancy free Masonry layout. It will compute elements position in Javascript and update their positions using css's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allow css animation during element positionning.
+MiniMasonry is a **lightweight** dependancy free Masonry layout. It will compute elements position in Javascript and update their positions using css's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allow css animation during element positionning.
 
 MiniMasonry is **responsive**, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.
 
@@ -57,13 +57,14 @@ Here is the list of available APIs :
 
 Name|Description
 ----|-----------
-layout()|If list has changed, trigger a relayout of the masonry
+layout()|If list has changed, trigger a relayout of the masonry.
+destroy()|Remove the resize listener and set back container as it was before initialization.
 
 MiniMasonry will add a "resize" event listener on the window to redraw the masonry on window resize. This listener is throttled to 66ms (15fps).
 
 ## Example
 
-[See website](https://spope.github.com/MiniMasonry.js)
+[See website](https://spope.github.io/MiniMasonry.js/)
 
 [codepen](https://codepen.io/Spope/pen/WNwrpyd)
 

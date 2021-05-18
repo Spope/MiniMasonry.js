@@ -4,6 +4,7 @@ var MiniMasonry = function(conf) {
     this._container         = null;
     this._count             = null;
     this._width             = 0;
+    this._removeListener    = null;
 
     this._resizeTimeout = null,
 
@@ -40,7 +41,12 @@ MiniMasonry.prototype.init = function(conf) {
     if (!this._container) {
         throw new Error('Container not found or missing');
     }
-    window.addEventListener("resize", this.resizeThrottler.bind(this));
+    const onResize = this.resizeThrottler.bind(this)
+
+    window.addEventListener("resize", onResize);
+    this._removeListener = function() {
+        window.removeEventListener("resize", onResize);
+    }
 
     this.layout();
 };
@@ -59,7 +65,7 @@ MiniMasonry.prototype.reset = function() {
     if (this.getCount() == 1) {
         // Set ultimate gutter when only one column is displayed
         this.conf.gutterX = this.conf.ultimateGutter;
-        // As gutters are reduced, to column may fit, forcing to 1
+        // As gutters are reduced, two column may fit, forcing to 1
         this._count = 1;
     }
 
@@ -136,7 +142,7 @@ MiniMasonry.prototype.layout =  function() {
 
         children[index].style.transform = 'translate3d(' + Math.round(x) + 'px,' + Math.round(y) + 'px,0)';
 
-        this._columns[nextColumn]  += this._sizes[index] + (this._count > 1 ? this.conf.gutterY : this.conf.ultimateGutter);//margin-bottom
+        this._columns[nextColumn] += this._sizes[index] + (this._count > 1 ? this.conf.gutterY : this.conf.ultimateGutter);//margin-bottom
     }
 
     this._container.style.height = (this._columns[this.getLongest()] - this.conf.gutterY) + 'px';
@@ -181,6 +187,20 @@ MiniMasonry.prototype.resizeThrottler = function() {
            // The actualResizeHandler will execute at a rate of 30fps
         }.bind(this), 33);
     }
+}
+
+MiniMasonry.prototype.destroy = function() {
+    if (typeof this._removeListener == "function") {
+        this._removeListener();
+    }
+
+    var children = this._container.children;
+    for (var k = 0;k< children.length; k++) {
+        children[k].style.removeProperty('width');
+        children[k].style.removeProperty('transform');
+    }
+    this._container.style.removeProperty('height');
+    this._container.style.removeProperty('min-width');
 }
 
 export default MiniMasonry;
