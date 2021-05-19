@@ -6,18 +6,19 @@ var MiniMasonry = function(conf) {
     this._width             = 0;
     this._removeListener    = null;
 
-    this._resizeTimeout = null,
+    this._resizeTimeout = null;
 
-    this.conf = {
-        baseWidth: 255,
-        gutterX: null,
-        gutterY: null,
-        gutter: 10,
-        container: null,
-        minify: true,
-        ultimateGutter: 5,
-        surroundingGutter: true
-    };
+        this.conf = {
+            baseWidth: 255,
+            gutterX: null,
+            gutterY: null,
+            gutter: 10,
+            container: null,
+            minify: true,
+            ultimateGutter: 5,
+            surroundingGutter: true,
+            center: true
+        };
 
     this.init(conf);
 
@@ -30,6 +31,8 @@ MiniMasonry.prototype.init = function(conf) {
             this.conf[i] = conf[i];
         }
     }
+    this._gutterX = this.conf.gutterX;
+
     if (this.conf.gutterX == null || this.conf.gutterY == null) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
@@ -62,11 +65,13 @@ MiniMasonry.prototype.reset = function() {
         this._container.style.minWidth = minWidth + 'px';
     }
 
-    if (this.getCount() == 1) {
+    if (this.getCount() === 1) {
         // Set ultimate gutter when only one column is displayed
         this.conf.gutterX = this.conf.ultimateGutter;
         // As gutters are reduced, two column may fit, forcing to 1
         this._count = 1;
+    } else {
+        this.conf.gutterX = this._gutterX ?? this.conf.gutter;
     }
 
     if (this._width < (this.conf.baseWidth + (2 * this.conf.gutterX))) {
@@ -122,7 +127,7 @@ MiniMasonry.prototype.layout =  function() {
     }
 
     var initialLeft = this.conf.surroundingGutter ? this.conf.gutterX : 0;
-    if (this._count > this._sizes.length) {
+    if (this._count > this._sizes.length && this.conf.center) {
         //If more columns than children
         var occupiedSpace = (this._sizes.length * (width + this.conf.gutterX)) - this.conf.gutterX;
         initialLeft       = ((this._width - occupiedSpace) / 2);
@@ -184,7 +189,7 @@ MiniMasonry.prototype.resizeThrottler = function() {
             if (this._container.clientWidth != this._width) {
                 this.layout();
             }
-           // The actualResizeHandler will execute at a rate of 30fps
+            // The actualResizeHandler will execute at a rate of 30fps
         }.bind(this), 33);
     }
 }
