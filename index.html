@@ -119,6 +119,16 @@
                         <td>5</td>
                         <td>Gutter applied when only 1 column can be displayed.</td>
                     </tr>
+                    <tr>
+                        <td>direction</td>
+                        <td>'ltr'</td>
+                        <td>Sorting direction, "ltr" or "rtl".</td>
+                    </tr>
+                    <tr>
+                        <td>wedge</td>
+                        <td>false</td>
+                        <td>False will start to sort from center, true will start from left or right according to direciton parameter.</td>
+                    </tr>
                 </table>
 
                 <h2 class="section_content">API</h2>
@@ -191,6 +201,22 @@
                 <div class="item" style="height: 70px;">5</div>
                 <div class="item" style="height: 50px;">6</div>
             </div>
+
+            <p class="section_content">Direction :</p>
+            <div class="pre_wrapper">
+                <pre><code class="javascript">var exampleDirection = new MiniMasonry({
+    container: '.example_direction',
+    direction: 'rtl'
+});</code></pre>
+            </div>
+            <div class="container example_direction section_content">
+                <div class="item" style="height: 150px;">1</div>
+                <div class="item" style="height: 50px;">2</div>
+                <div class="item" style="height: 80px;">3</div>
+                <div class="item" style="height: 100px;">4</div>
+                <div class="item" style="height: 70px;">5</div>
+                <div class="item" style="height: 50px;">6</div>
+            </div>
         </section>
 
         <section class="footer">
@@ -220,6 +246,11 @@
                 container: '.example_size',
                 gutter: 40,
                 baseWidth: 300
+            });
+
+            var exampleDirection = new MiniMasonry({
+                container: '.example_direction',
+                direction: 'rtl'
             });
         </script>
     </body>
