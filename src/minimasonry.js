@@ -16,7 +16,9 @@ var MiniMasonry = function(conf) {
         container: null,
         minify: true,
         ultimateGutter: 5,
-        surroundingGutter: true
+        surroundingGutter: true,
+        direction: 'ltr',
+        wedge: false
     };
 
     this.init(conf);
@@ -107,7 +109,7 @@ MiniMasonry.prototype.layout =  function() {
         this._count = this.getCount();
     }
     //Computing columns width
-    var width = this.computeWidth();
+    var colWidth = this.computeWidth();
 
     for (var i = 0; i < this._count; i++) {
         this._columns[i] = 0;
@@ -116,16 +118,33 @@ MiniMasonry.prototype.layout =  function() {
     //Saving children real heights
     var children = this._container.children;
     for (var k = 0;k< children.length; k++) {
-        // Set width before retrieving element height if content is proportional
-        children[k].style.width = width + 'px';
+        // Set colWidth before retrieving element height if content is proportional
+        children[k].style.width = colWidth + 'px';
         this._sizes[k] = children[k].clientHeight;
     }
 
-    var initialLeft = this.conf.surroundingGutter ? this.conf.gutterX : 0;
+    var startX;
+    if (this.conf.direction == 'ltr') {
+        startX = this.conf.surroundingGutter ? this.conf.gutterX : 0;
+    } else {
+        startX = this._width - (this.conf.surroundingGutter ? this.conf.gutterX : 0);
+    }
     if (this._count > this._sizes.length) {
         //If more columns than children
-        var occupiedSpace = (this._sizes.length * (width + this.conf.gutterX)) - this.conf.gutterX;
-        initialLeft       = ((this._width - occupiedSpace) / 2);
+        var occupiedSpace = (this._sizes.length * (colWidth + this.conf.gutterX)) - this.conf.gutterX;
+        if (this.conf.wedge === false) {
+            if (this.conf.direction == 'ltr') {
+                startX = ((this._width - occupiedSpace) / 2);
+            } else {
+                startX = this._width - ((this._width - occupiedSpace) / 2);
+            }
+        } else {
+            if (this.conf.direction == 'ltr') {
+                //
+            } else {
+                startX = this._width - this.conf.gutterX;
+            }
+        }
     }
 
     //Computing position of children
@@ -136,7 +155,12 @@ MiniMasonry.prototype.layout =  function() {
         if (this.conf.surroundingGutter || nextColumn != this._columns.length) {
             childrenGutter = this.conf.gutterX;
         }
-        var x = initialLeft + ((width + childrenGutter) * (nextColumn));
+        var x;
+        if (this.conf.direction == 'ltr') {
+            x = startX + ((colWidth + childrenGutter) * (nextColumn));
+        } else {
+            x = startX - ((colWidth + childrenGutter) * (nextColumn)) - colWidth;
+        }
         var y = this._columns[nextColumn];
 
 
