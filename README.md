@@ -51,7 +51,7 @@ minify (boolean)|true|Whether or not MiniMasonry place elements on shortest colu
 surroundingGutter (boolean)|true|Set left gutter on first columns and right gutter on last.
 ultimateGutter (int)|5|Gutter applied when only 1 column can be displayed.
 direction (string)|"ltr"|Sorting direction, "ltr" or "rtl"
-wedge (boolean)|false|False will start to sort from center, true will start from left or right according to direciton parameter.
+wedge (boolean)|false|False will start to sort from center, true will start from left or right according to direction parameter.
 
 ## API
 
