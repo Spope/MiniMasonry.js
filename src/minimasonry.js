@@ -5,6 +5,7 @@ var MiniMasonry = function(conf) {
     this._count             = null;
     this._width             = 0;
     this._removeListener    = null;
+    this._savedGutterX = null;
 
     this._resizeTimeout = null,
 
@@ -33,7 +34,7 @@ MiniMasonry.prototype.init = function(conf) {
         }
     }
     if (this.conf.gutterX == null || this.conf.gutterY == null) {
-        this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
+        this._savedGutterX = this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
 
     this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ?
@@ -69,11 +70,11 @@ MiniMasonry.prototype.reset = function() {
         this.conf.gutterX = this.conf.ultimateGutter;
         // As gutters are reduced, two column may fit, forcing to 1
         this._count = 1;
-    }
-
-    if (this._width < (this.conf.baseWidth + (2 * this.conf.gutterX))) {
+    } else if (this._width < (this.conf.baseWidth + (2 * this.conf.gutterX))) {
         // Remove gutter when screen is to low
         this.conf.gutterX = 0;
+    } else {
+        this.conf.gutterX  = this._savedGutterX
     }
 };
 
