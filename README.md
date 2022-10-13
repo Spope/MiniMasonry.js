@@ -2,9 +2,9 @@
 
 # MiniMasonry.js
 
-Minimalist dependancy free Masonry layout library
+Minimalist dependency free Masonry layout library
 
-MiniMasonry is a **lightweight** dependancy free Masonry layout. It will compute elements position in Javascript and update their positions using css's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allow css animation during element positionning.
+MiniMasonry is a **lightweight** dependency free Masonry layout. It will compute elements position in JavaScript and update their positions using CSS's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allows CSS animation during element positioning.
 
 MiniMasonry is **responsive**, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.
 
@@ -45,9 +45,9 @@ Name | Default value | Description
 baseWidth (int)|255|Target width of elements.
 container (string\|HTMLElement)|Null|Container's selector or element. **Required**
 gutter (int)|10|Width / height of gutter between elements. Use gutterX / gutterY to set different values.
-gutterX (int)|null|Width of gutter between elements. Need gutterY to works, fallback to `gutter`.
-gutterY (int)|null|Height of gutter between elements. Need gutterX to works, fallback to `gutter`.
-minify (boolean)|true|Whether or not MiniMasonry place elements on shortest column or keep exact order of list.
+gutterX (int)|null|Width of gutter between elements. Need gutterY to work, fallback to `gutter`.
+gutterY (int)|null|Height of gutter between elements. Need gutterX to work, fallback to `gutter`.
+minify (boolean)|true|Whether or not MiniMasonry places elements on the shortest column or keeps exact order of the list.
 surroundingGutter (boolean)|true|Set left gutter on first columns and right gutter on last.
 ultimateGutter (int)|5|Gutter applied when only 1 column can be displayed.
 direction (string)|"ltr"|Sorting direction, "ltr" or "rtl".
