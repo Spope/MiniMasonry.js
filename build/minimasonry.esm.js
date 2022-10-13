@@ -5,6 +5,8 @@ var MiniMasonry = function(conf) {
     this._count             = null;
     this._width             = 0;
     this._removeListener    = null;
+    this._currentGutterX    = null;
+    this._currentGutterY    = null;
 
     this._resizeTimeout = null,
 
@@ -32,9 +34,15 @@ MiniMasonry.prototype.init = function(conf) {
             this.conf[i] = conf[i];
         }
     }
+
     if (this.conf.gutterX == null || this.conf.gutterY == null) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
+
+    this._currentGutterX = this.conf.gutterX;
+    this._currentGutterY = this.conf.gutterY;
+
+    console.log(this._currentGutterX);
 
     this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ?
         this.conf.container :
@@ -66,31 +74,31 @@ MiniMasonry.prototype.reset = function() {
 
     if (this.getCount() == 1) {
         // Set ultimate gutter when only one column is displayed
-        this.conf.gutterX = this.conf.ultimateGutter;
+        this._currentGutterX = this.conf.ultimateGutter;
         // As gutters are reduced, two column may fit, forcing to 1
         this._count = 1;
-    }
-
-    if (this._width < (this.conf.baseWidth + (2 * this.conf.gutterX))) {
+    } else if (this._width < (this.conf.baseWidth + (2 * this._currentGutterX))) {
         // Remove gutter when screen is to low
-        this.conf.gutterX = 0;
+        this._currentGutterX = 0;
+    } else {
+        this._currentGutterX = this.conf.gutterX;
     }
 };
 
 MiniMasonry.prototype.getCount = function() {
     if (this.conf.surroundingGutter) {
-        return Math.floor((this._width - this.conf.gutterX) / (this.conf.baseWidth + this.conf.gutterX));
+        return Math.floor((this._width - this._currentGutterX) / (this.conf.baseWidth + this._currentGutterX));
     }
 
-    return Math.floor((this._width + this.conf.gutterX) / (this.conf.baseWidth + this.conf.gutterX));
+    return Math.floor((this._width + this._currentGutterX) / (this.conf.baseWidth + this._currentGutterX));
 };
 
 MiniMasonry.prototype.computeWidth = function() {
     var width;
     if (this.conf.surroundingGutter) {
-        width = ((this._width - this.conf.gutterX) / this._count) - this.conf.gutterX;
+        width = ((this._width - this._currentGutterX) / this._count) - this._currentGutterX;
     } else {
-        width = ((this._width + this.conf.gutterX) / this._count) - this.conf.gutterX;
+        width = ((this._width + this._currentGutterX) / this._count) - this._currentGutterX;
     }
     width = Number.parseFloat(width.toFixed(2));
 
@@ -125,13 +133,13 @@ MiniMasonry.prototype.layout =  function() {
 
     var startX;
     if (this.conf.direction == 'ltr') {
-        startX = this.conf.surroundingGutter ? this.conf.gutterX : 0;
+        startX = this.conf.surroundingGutter ? this._currentGutterX : 0;
     } else {
-        startX = this._width - (this.conf.surroundingGutter ? this.conf.gutterX : 0);
+        startX = this._width - (this.conf.surroundingGutter ? this._currentGutterX : 0);
     }
     if (this._count > this._sizes.length) {
         //If more columns than children
-        var occupiedSpace = (this._sizes.length * (colWidth + this.conf.gutterX)) - this.conf.gutterX;
+        var occupiedSpace = (this._sizes.length * (colWidth + this._currentGutterX)) - this._currentGutterX;
         if (this.conf.wedge === false) {
             if (this.conf.direction == 'ltr') {
                 startX = ((this._width - occupiedSpace) / 2);
@@ -140,7 +148,7 @@ MiniMasonry.prototype.layout =  function() {
             }
         } else {
             if (this.conf.direction == 'ltr') ; else {
-                startX = this._width - this.conf.gutterX;
+                startX = this._width - this._currentGutterX;
             }
         }
     }
@@ -151,7 +159,7 @@ MiniMasonry.prototype.layout =  function() {
 
         var childrenGutter = 0;
         if (this.conf.surroundingGutter || nextColumn != this._columns.length) {
-            childrenGutter = this.conf.gutterX;
+            childrenGutter = this._currentGutterX;
         }
         var x;
         if (this.conf.direction == 'ltr') {
@@ -167,7 +175,7 @@ MiniMasonry.prototype.layout =  function() {
         this._columns[nextColumn] += this._sizes[index] + (this._count > 1 ? this.conf.gutterY : this.conf.ultimateGutter);//margin-bottom
     }
 
-    this._container.style.height = (this._columns[this.getLongest()] - this.conf.gutterY) + 'px';
+    this._container.style.height = (this._columns[this.getLongest()] - this._currentGutterY) + 'px';
 };
 
 MiniMasonry.prototype.getNextColumn = function(index) {
