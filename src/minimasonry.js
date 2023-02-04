@@ -20,7 +20,8 @@ var MiniMasonry = function(conf) {
         ultimateGutter: 5,
         surroundingGutter: true,
         direction: 'ltr',
-        wedge: false
+        wedge: false,
+        responsive: true,
     };
 
     this.init(conf);
@@ -49,10 +50,12 @@ MiniMasonry.prototype.init = function(conf) {
         throw new Error('Container not found or missing');
     }
 
-    var onResize = this.resizeThrottler.bind(this)
-    window.addEventListener("resize", onResize);
-    this._removeListener = function() {
-        window.removeEventListener("resize", onResize);
+    if(this.conf.responsive) {
+        var onResize = this.resizeThrottler.bind(this)
+        window.addEventListener("resize", onResize);
+        this._removeListener = function() {
+            window.removeEventListener("resize", onResize);
+        }    
     }
 
     this.layout();
@@ -213,8 +216,8 @@ MiniMasonry.prototype.resizeThrottler = function() {
             if (this._container.clientWidth != this._width) {
                 this.layout();
             }
-           // The actualResizeHandler will execute at a rate of 30fps
-        }.bind(this), 33);
+           // The actualResizeHandler will execute at a rate of 15fps
+        }.bind(this), 66);
     }
 }
 

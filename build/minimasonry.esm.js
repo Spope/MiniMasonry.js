@@ -20,7 +20,8 @@ var MiniMasonry = function(conf) {
         ultimateGutter: 5,
         surroundingGutter: true,
         direction: 'ltr',
-        wedge: false
+        wedge: false,
+        responsive: true,
     };
 
     this.init(conf);
@@ -38,11 +39,8 @@ MiniMasonry.prototype.init = function(conf) {
     if (this.conf.gutterX == null || this.conf.gutterY == null) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
-
     this._currentGutterX = this.conf.gutterX;
     this._currentGutterY = this.conf.gutterY;
-
-    console.log(this._currentGutterX);
 
     this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ?
         this.conf.container :
@@ -52,11 +50,13 @@ MiniMasonry.prototype.init = function(conf) {
         throw new Error('Container not found or missing');
     }
 
-    var onResize = this.resizeThrottler.bind(this);
-    window.addEventListener("resize", onResize);
-    this._removeListener = function() {
-        window.removeEventListener("resize", onResize);
-    };
+    if(this.conf.responsive) {
+        var onResize = this.resizeThrottler.bind(this);
+        window.addEventListener("resize", onResize);
+        this._removeListener = function() {
+            window.removeEventListener("resize", onResize);
+        };    
+    }
 
     this.layout();
 };
@@ -214,8 +214,8 @@ MiniMasonry.prototype.resizeThrottler = function() {
             if (this._container.clientWidth != this._width) {
                 this.layout();
             }
-           // The actualResizeHandler will execute at a rate of 30fps
-        }.bind(this), 33);
+           // The actualResizeHandler will execute at a rate of 15fps
+        }.bind(this), 66);
     }
 };
 
