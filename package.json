@@ -1,7 +1,7 @@
 {
   "name": "minimasonry",
   "description": "Minimalist dependancy free Masonry layout library",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
     "rollup": "^2.58.3",
@@ -13,6 +13,7 @@
   },
   "main": "build/minimasonry.min.js",
   "module": "build/minimasonry.esm.js",
+  "types": "index.d.ts",
   "dependencies": {},
   "repository": {
     "type": "git",

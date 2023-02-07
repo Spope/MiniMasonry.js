@@ -6,7 +6,7 @@ Minimalist dependency free Masonry layout library
 
 MiniMasonry is a **lightweight** dependency free Masonry layout. It will compute elements position in JavaScript and update their positions using CSS's **transform attribute**. This means positioning does not trigger browser layout and **use** the device's **GPU**. This also allows CSS animation during element positioning.
 
-MiniMasonry is **responsive**, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.
+MiniMasonry is **responsive** by default, you give it a target width and it will adjust columns number and elements width. MiniMasonry will increase element width (until another column can fit in the layout) but will never reduce the target width.
 
 ## Installation
 
@@ -27,7 +27,7 @@ import MiniMasonry from "minimasonry";
 
 ## Usage
 
-To use MiniMasonry you should have a container **relatively positioned** with your elements as children. Those **children** elements must be **absolutely positioned**.
+⚠️ To use MiniMasonry you should have a container **relatively positioned** with your elements as children. Those **children** elements must be **absolutely positioned**.
 
 Then you can initialise MiniMasonry :
 
@@ -52,6 +52,7 @@ surroundingGutter (boolean)|true|Set left gutter on first columns and right gutt
 ultimateGutter (int)|5|Gutter applied when only 1 column can be displayed.
 direction (string)|"ltr"|Sorting direction, "ltr" or "rtl".
 wedge (boolean)|false|False will start to sort from center, true will start from left or right according to direction parameter.
+responsive (boolean)|true|True will add a "resize" event listener on the window to redraw the masonry on window resize. This listener is throttled to 66ms (15fps).
 
 ## API
 
@@ -60,9 +61,7 @@ Here is the list of available APIs :
 Name|Description
 ----|-----------
 layout()|If list has changed, trigger a relayout of the masonry.
-destroy()|Remove the resize listener and set back container as it was before initialization.
-
-MiniMasonry will add a "resize" event listener on the window to redraw the masonry on window resize. This listener is throttled to 66ms (15fps).
+destroy()|Remove the resize listener if any and set back container as it was before initialization.
 
 ## Example
 
