@@ -53,6 +53,10 @@ MiniMasonry.prototype.init = function(conf) {
     window.addEventListener("resize", onResize);
     this._removeListener = function() {
         window.removeEventListener("resize", onResize);
+        if (this._resizeTimeout != null) {
+            window.clearTimeout(this._resizeTimeout);
+            this._resizeTimeout = null;
+        }
     }
 
     this.layout();
