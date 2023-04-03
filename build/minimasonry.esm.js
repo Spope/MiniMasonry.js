@@ -38,11 +38,8 @@ MiniMasonry.prototype.init = function(conf) {
     if (this.conf.gutterX == null || this.conf.gutterY == null) {
         this.conf.gutterX = this.conf.gutterY = this.conf.gutter;
     }
-
     this._currentGutterX = this.conf.gutterX;
     this._currentGutterY = this.conf.gutterY;
-
-    console.log(this._currentGutterX);
 
     this._container = typeof this.conf.container == 'object' && this.conf.container.nodeName ?
         this.conf.container :
@@ -56,6 +53,10 @@ MiniMasonry.prototype.init = function(conf) {
     window.addEventListener("resize", onResize);
     this._removeListener = function() {
         window.removeEventListener("resize", onResize);
+        if (this._resizeTimeout != null) {
+            window.clearTimeout(this._resizeTimeout);
+            this._resizeTimeout = null;
+        }
     };
 
     this.layout();
