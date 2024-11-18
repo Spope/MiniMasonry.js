@@ -1,12 +1,15 @@
 var MiniMasonry = function(conf) {
-    this._sizes             = [];
-    this._columns           = [];
-    this._container         = null;
-    this._count             = null;
-    this._width             = 0;
-    this._removeListener    = null;
-    this._currentGutterX    = null;
-    this._currentGutterY    = null;
+    this._sizes                     = [];
+    this._columns                   = [];
+    this._container                 = null;
+    this._count                     = null;
+    this._width                     = 0;
+    this._removeListener            = null;
+    this._currentGutterX            = null;
+    this._currentGutterY            = null;
+    this._containerResizeObserver   = null;
+    this._childrenResizeObserver    = null;
+    this._mutationObserver          = null;
 
     this._resizeTimeout = null,
 
@@ -50,14 +53,22 @@ MiniMasonry.prototype.init = function(conf) {
     }
 
     var onResize = this.resizeThrottler.bind(this)
-    window.addEventListener("resize", onResize);
-    this._removeListener = function() {
-        window.removeEventListener("resize", onResize);
-        if (this._resizeTimeout != null) {
-            window.clearTimeout(this._resizeTimeout);
-            this._resizeTimeout = null;
+
+    this._containerResizeObserver = new ResizeObserver(onResize);
+
+    this._childrenResizeObserver = new ResizeObserver(() => this.layout());
+
+    this._mutationObserver = new MutationObserver(() => {
+
+        this._childrenResizeObserver.disconnect();
+
+        for (const child of this._container.children) {
+            this._childrenResizeObserver.observe(child);
         }
-    }
+    });
+
+    this._containerResizeObserver.observe(this._container);
+    this._mutationObserver.observe(this._container, { childList: true });
 
     this.layout();
 };
@@ -223,9 +234,9 @@ MiniMasonry.prototype.resizeThrottler = function() {
 }
 
 MiniMasonry.prototype.destroy = function() {
-    if (typeof this._removeListener == "function") {
-        this._removeListener();
-    }
+    this._containerResizeObserver.disconnect();
+    this._childrenResizeObserver.disconnect();
+    this._mutationObserver.disconnect();
 
     var children = this._container.children;
     for (var k = 0;k< children.length; k++) {
